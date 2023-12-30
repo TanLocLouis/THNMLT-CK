@@ -4,17 +4,28 @@
 #include <iomanip>
 using namespace std;
 
+const int PI = 3.14;
+
 typedef struct Rectangles {
 	double w;
 	double h;
+
+	double area;
+	double perimeter;
 };
 
 typedef struct Squares {
 	double a;
+
+	double area;
+	double perimeter;
 };
 
 typedef struct Circles {
 	double r;
+
+	double area;
+	double perimeter;
 };
 
 enum Type {
@@ -91,6 +102,33 @@ void splitShapes(int n, string inputData[100], void**& a, Type types[100]) {
 	}
 }
 
+double areaRectangle(Rectangles* value) {
+	return value->w * value->h;
+}
+
+double areaSquare(Squares* value) {
+	return value->a * value->a;
+}
+
+double areaCircle(Circles* value) {
+	return PI * (value->r * value->r);
+}
+
+void calcArea(void* value, Type type) {
+	if (Type::RectangleShape == type) {
+		Rectangles* rec = (Rectangles*) value;
+		rec->area = areaRectangle(rec);
+	}
+	else if (Type::SquareShape == type) {
+		Squares* sqr = (Squares*) value;
+		sqr->area = areaSquare(sqr);
+	}
+	else {
+		Circles* cir = (Circles*) value;
+		cir->area = areaCircle(cir);
+	}
+}
+
 void printRectangle(Rectangles* rec) {
 	cout << "Rectangle: w=" << rec->w << ", h=" << rec->h << endl;
 }
@@ -124,6 +162,10 @@ int main() {
 	void** a = new void*[MAX]; // Store struct
 	Type* types = new Type[MAX];
 	splitShapes(n, inputData, a, types);
+
+	for (int i = 0; i < n; i++) {
+		calcArea(a[i], types[i]);
+	}
 	/*Squares s1;
 	s1.a = 10.01;
 	a[0] = (void*)&s1;
