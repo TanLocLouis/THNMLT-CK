@@ -3,9 +3,9 @@
 #include <string>
 #include <iomanip>
 using namespace std;
-
-const int PI = 3.14;
-
+// Define Pi constant
+const int PI = 3.14; 
+// Define struct for 3 shapes
 typedef struct Rectangles {
 	double w;
 	double h;
@@ -101,7 +101,7 @@ void splitShapes(int n, string inputData[100], void**& a, Type types[100]) {
 		}
 	}
 }
-
+// Calculate Area for 3 shapes
 double areaRectangle(Rectangles* value) {
 	return value->w * value->h;
 }
@@ -113,32 +113,53 @@ double areaSquare(Squares* value) {
 double areaCircle(Circles* value) {
 	return PI * (value->r * value->r);
 }
+// Calculate Perimeter for 3 shapes
+double perimeterRectangle(Rectangles* value) {
+	return 2 * (value->w + value->h); 
+}
+
+double perimeterSquare(Squares* value) {
+	return 4 * value->a;
+}
+
+double perimeterCircle(Circles* value) {
+	return 2 * PI * value->r;
+}
 
 void calcArea(void* value, Type type) {
 	if (Type::RectangleShape == type) {
 		Rectangles* rec = (Rectangles*) value;
 		rec->area = areaRectangle(rec);
+		rec->perimeter = perimeterRectangle(rec);
 	}
 	else if (Type::SquareShape == type) {
 		Squares* sqr = (Squares*) value;
 		sqr->area = areaSquare(sqr);
+		sqr->perimeter = perimeterSquare(sqr);
 	}
 	else {
 		Circles* cir = (Circles*) value;
 		cir->area = areaCircle(cir);
+		cir->perimeter = perimeterCircle(cir);
 	}
 }
-
+// Print 3 shapes
 void printRectangle(Rectangles* rec) {
-	cout << "Rectangle: w=" << rec->w << ", h=" << rec->h << endl;
+	cout << "Rectangle: w=" << rec->w << ", h=" << rec->h;
+	cout << " => area=" << rec->area << ", perimeter=" << rec->perimeter;
+	cout << endl;
 }
 
 void printSquare(Squares* sqr) {
-	cout << "Square: a=" << sqr->a << endl;
+	cout << "Square: a=" << sqr->a;
+	cout << " => area=" << sqr->area << ", perimeter=" << sqr->perimeter;
+	cout << endl;
 }
 
 void printCircle(Circles* cir) {
-	cout << "Circle: r=" << cir->r << endl;
+	cout << "Circle: r=" << cir->r;
+	cout << " => area=" << cir->area << ", perimeter=" << cir->perimeter;
+	cout << endl;
 }
 
 void outputShape(void* value, Type type) {
