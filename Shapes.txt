@@ -1,0 +1,8 @@
+7
+Square: a=12.3
+Circle: r=12.5
+Square: a=7.6
+Rectangle: w=3.1, h=4.2
+Rectangle: w=6.15, h=8.4
+Circle: r=5.77
+Square: a=8.913
