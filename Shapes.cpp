@@ -126,7 +126,7 @@ double perimeterCircle(Circles* value) {
 	return 2 * PI * value->r;
 }
 
-void calcArea(void* value, Type type) {
+void calcAreaPerimeter(void* value, Type type) {
 	if (Type::RectangleShape == type) {
 		Rectangles* rec = (Rectangles*) value;
 		rec->area = areaRectangle(rec);
@@ -174,6 +174,26 @@ void outputShape(void* value, Type type) {
 	}
 }
 
+void outputNumber(Type *types, int n) {
+	int rec = 0, sqr = 0, cir = 0;
+	for (int i = 0; i < n; i++) {
+		if (Type::RectangleShape == types[i]) {
+			rec++;
+		}
+		else if (Type::SquareShape == types[i]) {
+			sqr++;
+		}
+		else {
+			cir++;
+		}
+	}
+	cout << endl;
+	cout << "Thong ke cac hinh da doc" << endl;
+	cout << "+ Square: " << sqr << endl;
+	cout << "+ Circle: " << cir << endl;
+	cout << "+ Rectangle: " << rec << endl;
+}
+
 int main() {
 	const int MAX = 100;
 	int n;
@@ -184,21 +204,17 @@ int main() {
 	Type* types = new Type[MAX];
 	splitShapes(n, inputData, a, types);
 
+	// Find area and perimeter for each item
 	for (int i = 0; i < n; i++) {
-		calcArea(a[i], types[i]);
+		calcAreaPerimeter(a[i], types[i]);
 	}
-	/*Squares s1;
-	s1.a = 10.01;
-	a[0] = (void*)&s1;
 
-	Squares* test = (Squares*) a[0];
-	cout << test->a << endl;
-	printSquare(test);
-	cout << "After pass to function: " << endl;
-	cout << test->a << endl;*/
-
+	// Output each item
 	for (int i = 0; i < n; i++) {
 		outputShape(a[i], types[i]);
 	}
+	// Output number of item's type
+	outputNumber(types, n);
+	
 	return 0;
 }
