@@ -162,15 +162,17 @@ void printCircle(Circles* cir) {
 	cout << endl;
 }
 
-void outputShape(void* value, Type type) {
-	if (Type::RectangleShape == type) {
-		printRectangle((Rectangles*) value);
-	}
-	else if (Type::SquareShape == type) {
-		printSquare((Squares*) value);
-	}
-	else {
-		printCircle((Circles*) value);
+void outputShape(void**& a, Type types[100], int n) {
+	for (int i = 0; i < n; i++) {
+		if (Type::RectangleShape == types[i]) {
+			printRectangle((Rectangles*) a[i]);
+		}
+		else if (Type::SquareShape == types[i]) {
+			printSquare((Squares*) a[i]);
+		}
+		else {
+			printCircle((Circles*) a[i]);
+		}
 	}
 }
 
@@ -209,12 +211,36 @@ int main() {
 		calcAreaPerimeter(a[i], types[i]);
 	}
 
-	// Output each item
-	for (int i = 0; i < n; i++) {
-		outputShape(a[i], types[i]);
-	}
-	// Output number of item's type
-	outputNumber(types, n);
+	int choice = 0;
+	do {
+		cout << endl;
+		cout << "--------------------SHAPES PROJECT---------------------" << endl;
+		cout << "=> 0: Exit" << endl;
+		cout << "=> 1: Output each item" << endl;
+		cout << "=> 2: Output number of each item" << endl;
+		cout << "-------------------------------------------------------" << endl;
+
+		cout << "Enter your choice: ";
+		cin >> choice;
+		cout << endl;
+		switch (choice) {
+		case 0:
+			break;
+		case 1:
+			// Output each item
+			outputShape(a, types, n);
+			break;
+		case 2:
+			// Output number of item's type
+			outputNumber(types, n);
+			break;
+		}
+		cout << endl;
+		cout << "Press enter to continue your choice..." << endl;
+		cout << "=======================================================" << endl;
+		cin.ignore();
+		getchar();
+	} while (choice != 0);
 	
 	return 0;
 }
