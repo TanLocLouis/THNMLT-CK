@@ -1,8 +1,8 @@
 ﻿  Shapes.cpp
-C:\Users\Admin\Desktop\THNMLT\Shapes\Shapes\Shapes.cpp(7,16): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\Admin\Desktop\THNMLT\Shapes\Shapes\Shapes.cpp(15,2): warning C4091: 'typedef ': ignored on left of 'Rectangles' when no variable is declared
-C:\Users\Admin\Desktop\THNMLT\Shapes\Shapes\Shapes.cpp(22,2): warning C4091: 'typedef ': ignored on left of 'Squares' when no variable is declared
-C:\Users\Admin\Desktop\THNMLT\Shapes\Shapes\Shapes.cpp(29,2): warning C4091: 'typedef ': ignored on left of 'Circles' when no variable is declared
-C:\Users\Admin\Desktop\THNMLT\Shapes\Shapes\Shapes.cpp(60,11): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Admin\Desktop\THNMLT\Shapes\Shapes\Shapes.cpp(67,13): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Admin\Desktop\THNMLT\Shapes\Shapes\Shapes.cpp(9,16): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\Admin\Desktop\THNMLT\Shapes\Shapes\Shapes.cpp(17,2): warning C4091: 'typedef ': ignored on left of 'Rectangles' when no variable is declared
+C:\Users\Admin\Desktop\THNMLT\Shapes\Shapes\Shapes.cpp(24,2): warning C4091: 'typedef ': ignored on left of 'Squares' when no variable is declared
+C:\Users\Admin\Desktop\THNMLT\Shapes\Shapes\Shapes.cpp(31,2): warning C4091: 'typedef ': ignored on left of 'Circles' when no variable is declared
+C:\Users\Admin\Desktop\THNMLT\Shapes\Shapes\Shapes.cpp(62,11): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Admin\Desktop\THNMLT\Shapes\Shapes\Shapes.cpp(69,13): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   Shapes.vcxproj -> C:\Users\Admin\Desktop\THNMLT\Shapes\x64\Debug\Shapes.exe

@@ -2,6 +2,8 @@
 #include <fstream>
 #include <string>
 #include <iomanip>
+#include <limits.h>
+
 using namespace std;
 // Define Pi constant
 const int PI = 3.14; 
@@ -162,6 +164,137 @@ void printCircle(Circles* cir) {
 	cout << endl;
 }
 
+void outputMinMax(void**& a, Type types[100], int n) {
+	double minPer = INT_MAX, maxPer = INT_MIN;
+	double minArea = INT_MAX, maxArea = INT_MIN;
+	
+	void* minPerShape = a[0]; Type minPerType = Type::RectangleShape;
+	void* maxPerShape = a[0]; Type maxPerType = Type::RectangleShape;
+	void* minAreaShape = a[0]; Type minAreaType = Type::RectangleShape;
+	void* maxAreaShape = a[0]; Type maxAreaType = Type::RectangleShape;
+
+	// find min, max, Area, Perimeter
+	for (int i = 0; i < n; i++) {
+		if (Type::RectangleShape == types[i]) {
+			Rectangles* rec = (Rectangles*)a[i];
+			if (rec->perimeter < minPer) {
+				minPer = rec->perimeter;
+				minPerShape = rec; minPerType = Type::RectangleShape;
+			}
+			if (rec->perimeter > maxPer) {
+				maxPer = rec->perimeter;
+				maxPerShape = rec; maxPerType = Type::RectangleShape;
+			}
+
+			if (rec->area < minArea) {
+				minArea = rec->area;
+				minAreaShape = rec; minAreaType = Type::RectangleShape;
+			}
+			if (rec->area > maxArea) {
+				maxArea = rec->area;
+				maxAreaShape = rec; maxAreaType = Type::RectangleShape;
+			}
+		}
+		else if (Type::SquareShape == types[i]) {
+			Squares* sqr = (Squares*)a[i];
+			if (sqr->perimeter < minPer) {
+				minPer = sqr->perimeter;
+				minPerShape = sqr; minPerType = Type::SquareShape;
+			}
+			if (sqr->perimeter > maxPer) {
+				maxPer = sqr->perimeter;
+				maxPerShape = sqr; maxPerType = Type::SquareShape;
+			}
+
+			if (sqr->area < minArea) {
+				minArea = sqr->area;
+				minAreaShape = sqr; minAreaType = Type::SquareShape;
+			}
+			if (sqr->area > maxArea) {
+				maxArea = sqr->area;
+				maxAreaShape = sqr; maxAreaType = Type::SquareShape;
+			}
+		}
+		else {
+			Circles* cir = (Circles*)a[i];
+			if (cir->perimeter < minPer) {
+				minPer = cir->perimeter;
+				minPerShape = cir; minPerType = Type::CircleShape;
+			}
+			if (cir->perimeter > maxPer) {
+				maxPer = cir->perimeter;
+				maxPerShape = cir; maxPerType = Type::CircleShape;
+			}
+
+			if (cir->area < minArea) {
+				minArea = cir->area;
+				minAreaShape = cir; minAreaType = Type::CircleShape;
+			}
+			if (cir->area > maxArea) {
+				maxArea = cir->area;
+				maxAreaShape = cir; maxAreaType = Type::CircleShape;
+			}
+		}
+	}
+
+	// Output max Perimeter
+	cout << "Hinh co chu vi lon nhat: ";
+	if (Type::RectangleShape == maxPerType) {
+		Rectangles* rec = (Rectangles*)maxPerShape;
+		cout << "Rectangle w=" << rec->w << ", h=" << rec->h << " => perimeter=" << rec->perimeter << endl;
+	}
+	else if (Type::SquareShape == maxPerType) {
+		Squares* sqr = (Squares*)maxPerShape;
+		cout << "Square a=" << sqr->a << " => perimeter=" << sqr->perimeter << endl;
+	}
+	else {
+		Circles* cir = (Circles*)maxPerShape;
+		cout << "Circle r=" << cir->r << " => perimeter=" << cir->perimeter << endl;
+	}
+	// Output max Area
+	cout << "Hinh co dien tich lon nhat: ";
+	if (Type::RectangleShape == maxAreaType) {
+		Rectangles* rec = (Rectangles*)maxAreaShape;
+		cout << "Rectangle w=" << rec->w << ", h=" << rec->h << " => area=" << rec->area << endl;
+	}
+	else if (Type::SquareShape == maxAreaType) {
+		Squares* sqr = (Squares*)maxAreaShape;
+		cout << "Square a=" << sqr->a << " => area=" << sqr->area << endl;
+	}
+	else {
+		Circles* cir = (Circles*)maxAreaShape;
+		cout << "Circle r=" << cir->r << " => area=" << cir->area << endl;
+	}
+	// Output min Perimeter
+	cout << "Hinh co chu vi nho nhat: ";
+	if (Type::RectangleShape == minPerType) {
+		Rectangles* rec = (Rectangles*)minPerShape;
+		cout << "Rectangle w=" << rec->w << ", h=" << rec->h << " => perimeter=" << rec->perimeter << endl;
+	}
+	else if (Type::SquareShape == minPerType) {
+		Squares* sqr = (Squares*)minPerShape;
+		cout << "Square a=" << sqr->a << " => perimeter=" << sqr->perimeter << endl;
+	}
+	else {
+		Circles* cir = (Circles*)minPerShape;
+		cout << "Circle r=" << cir->r << " => perimeter=" << cir->perimeter << endl;
+	}
+	// Output min Area
+	cout << "Hinh co dien tich nho nhat: ";
+	if (Type::RectangleShape == minAreaType) {
+		Rectangles* rec = (Rectangles*)minAreaShape;
+		cout << "Rectangle w=" << rec->w << ", h=" << rec->h << " => area=" << rec->area << endl;
+	}
+	else if (Type::SquareShape == minAreaType) {
+		Squares* sqr = (Squares*)minAreaShape;
+		cout << "Square a=" << sqr->a << " => area=" << sqr->area << endl;
+	}
+	else {
+		Circles* cir = (Circles*)minAreaShape;
+		cout << "Circle r=" << cir->r << " => area=" << cir->area << endl;
+	}
+}
+
 void outputShape(void**& a, Type types[100], int n) {
 	for (int i = 0; i < n; i++) {
 		if (Type::RectangleShape == types[i]) {
@@ -174,6 +307,7 @@ void outputShape(void**& a, Type types[100], int n) {
 			printCircle((Circles*) a[i]);
 		}
 	}
+	cout << endl;
 }
 
 void outputNumber(Type *types, int n) {
@@ -217,7 +351,9 @@ int main() {
 		cout << "--------------------SHAPES PROJECT---------------------" << endl;
 		cout << "=> 0: Exit" << endl;
 		cout << "=> 1: Output each item" << endl;
-		cout << "=> 2: Output number of each item" << endl;
+		cout << "=> 2: Output min max of area, perimeter" << endl;
+		cout << "=> 3: Output number of each item" << endl;
+		cout << "=> 4: Output all infomation" << endl;
 		cout << "-------------------------------------------------------" << endl;
 
 		cout << "Enter your choice: ";
@@ -231,15 +367,24 @@ int main() {
 			outputShape(a, types, n);
 			break;
 		case 2:
+			// Find min max area, perimeter items
+			outputMinMax(a, types, n);
+			break;
+		case 3:
 			// Output number of item's type
 			outputNumber(types, n);
 			break;
+		case 4:
+			outputShape(a, types, n);
+			outputMinMax(a, types, n);
+			outputNumber(types, n);
 		}
 		cout << endl;
 		cout << "Press enter to continue your choice..." << endl;
 		cout << "=======================================================" << endl;
 		cin.ignore();
 		getchar();
+		system("cls");
 	} while (choice != 0);
 	
 	return 0;
